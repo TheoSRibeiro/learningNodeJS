@@ -40,3 +40,10 @@ VALUES( "Joao",
         "joao@gmail.com",
         28
 );
+
+--DELETANDO REGISTRO NO BD
+
+DELETE FROM usuarios WHERE nome = "Joao";
+
+--ATUALIZANDO REGISTRO NA TABELA
+UPDATE usuarios SET nome = "Mariana" WHERE nome = "Maria";
