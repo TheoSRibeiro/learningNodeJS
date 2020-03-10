@@ -45,6 +45,12 @@ const Sequelize = require('sequelize')
             dialect: "mysql"
         }) //vai se conectar a um BD ja existente
 
+
+//Rotas
+app.get('/cad', function(req,res){
+    res.render('formulario')
+})
+
 //abrir servidor e deixar rodando
 app.listen(8081, function(){
 
