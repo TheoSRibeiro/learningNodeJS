@@ -3,6 +3,8 @@ const express = require("express") //constante para evitar mudancas indesejaveis
 const app = express();
 //BODY PARSER -- RECEBER DADOS DE QUALQUER FORMULARIO DENTRO DO EXPRESS > npm install --save body-parser
 const bodyparser = require('body-parser')
+//RECEBER O MODEL POST para manipular diretamente dele 
+const Post = require('./models/Post')
 
 /*
 //criar as rotas da aplicacao
@@ -45,12 +47,24 @@ app.use(bodyparser.json())
 
 
 //Rotas
+app.get('/',function(req,res){
+    res.render('home')
+})
+
 app.get('/cad', function(req,res){
     res.render('formulario')
 })
 
 app.post('/cadastro',function(req,res){ //USA POST SE A REQUISICAO FOR UM METODO POST
-    res.send("Texto: " + req.body.titulo + "Conteúdo: "+req.body.conteudo) 
+    Post.create({ //funcao que vai criar o POST do MODEL para inserir o titulo e conteudo no BD
+        titulo: req.body.titulo,
+        conteudo: req.body.conteudo
+    }).then(function(){ //tratamento para saber se o Post foi criado com sucesso!
+        //res.send("Post criado com sucesso!")
+        res.redirect('/') //redirecionar para o home
+    }).catch(function(erro){
+        res.send("Houve um erro: "+erro)
+    })
 })
 
 
