@@ -32,8 +32,6 @@ app.get('/ola/:nome/:cargo/:cor', function(req, res){
 //HANDLEBARS
 //instalar o handlebars: npm install --save express-handlebars
 const handlebars = require('express-handlebars')
-//O módulo SEQUELIZE se conecta automaticamente ao BD
-const Sequelize = require('sequelize')
 
 //BODY PARSER
 app.use(bodyparser.urlencoded({ extended: false }))
@@ -44,12 +42,6 @@ app.use(bodyparser.json())
     //Deve-se usar o HandleBars como template ENGINE
         app.engine('handlebars', handlebars({defaultLayout: 'main'}))
         app.set('view engine', 'handlebars')
-
-    // Conexão com o banco de dados MySQL
-        const sequelize = new Sequelize('testesequelize', 'root', '123456', {
-            host: "localhost",
-            dialect: "mysql"
-        }) //vai se conectar a um BD ja existente
 
 
 //Rotas
