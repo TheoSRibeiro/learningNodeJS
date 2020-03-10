@@ -1,6 +1,8 @@
 //para instalar o framework express, digite o comando no terminal: npm install express --save
 const express = require("express") //constante para evitar mudancas indesejaveis
 const app = express();
+//BODY PARSER -- RECEBER DADOS DE QUALQUER FORMULARIO DENTRO DO EXPRESS > npm install --save body-parser
+const bodyparser = require('body-parser')
 
 /*
 //criar as rotas da aplicacao
@@ -33,6 +35,10 @@ const handlebars = require('express-handlebars')
 //O módulo SEQUELIZE se conecta automaticamente ao BD
 const Sequelize = require('sequelize')
 
+//BODY PARSER
+app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json())
+
 //Config
     //Template Engine 
     //Deve-se usar o HandleBars como template ENGINE
@@ -52,8 +58,9 @@ app.get('/cad', function(req,res){
 })
 
 app.post('/cadastro',function(req,res){ //USA POST SE A REQUISICAO FOR UM METODO POST
-   res.send("Formulario Recebido!") 
+    res.send("Texto: " + req.body.titulo + "Conteúdo: "+req.body.conteudo) 
 })
+
 
 //abrir servidor e deixar rodando
 app.listen(8081, function(){
