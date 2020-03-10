@@ -51,6 +51,10 @@ app.get('/cad', function(req,res){
     res.render('formulario')
 })
 
+app.post('/cadastro',function(req,res){ //USA POST SE A REQUISICAO FOR UM METODO POST
+   res.send("Formulario Recebido!") 
+})
+
 //abrir servidor e deixar rodando
 app.listen(8081, function(){
 
