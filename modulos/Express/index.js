@@ -1,7 +1,8 @@
 //para instalar o framework express, digite o comando no terminal: npm install express --save
 const express = require("express") //constante para evitar mudancas indesejaveis
-const app = express()
+const app = express();
 
+/*
 //criar as rotas da aplicacao
 app.get("/", function(req, res){ //req - requisicao e o res - resposta ao cliente
     //res.send("Seja bem vindo ao meu app!")
@@ -23,8 +24,26 @@ app.get('/ola/:nome/:cargo/:cor', function(req, res){
             "<h2>Seu cargo eh: " + req.params.cargo + "</h2>" + 
             "<h3>Sua cor favorita eh: " + req.params.cor + "</h3>") //so pode enviar o send uma unica vez na rota
 })
-
+*/
 //instalar nodemon, no terminal seguir o comando: npm install nodemon -g
+
+//HANDLEBARS
+//instalar o handlebars: npm install --save express-handlebars
+const handlebars = require('express-handlebars')
+//O módulo SEQUELIZE se conecta automaticamente ao BD
+const Sequelize = require('sequelize')
+
+//Config
+    //Template Engine 
+    //Deve-se usar o HandleBars como template ENGINE
+        app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+        app.set('view engine', 'handlebars')
+
+    // Conexão com o banco de dados MySQL
+        const sequelize = new Sequelize('testesequelize', 'root', '123456', {
+            host: "localhost",
+            dialect: "mysql"
+        }) //vai se conectar a um BD ja existente
 
 //abrir servidor e deixar rodando
 app.listen(8081, function(){
