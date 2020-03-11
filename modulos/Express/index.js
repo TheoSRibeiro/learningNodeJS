@@ -34,6 +34,8 @@ app.get('/ola/:nome/:cargo/:cor', function(req, res){
 //HANDLEBARS
 //instalar o handlebars: npm install --save express-handlebars
 const handlebars = require('express-handlebars')
+const Handlebars = require('handlebars') //tive que usar para nao ter erro de acesso ao BD
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access') //houve erro, assim, da permissoes para acessar o bd
 
 //BODY PARSER
 app.use(bodyparser.urlencoded({ extended: false }))
@@ -42,13 +44,20 @@ app.use(bodyparser.json())
 //Config
     //Template Engine 
     //Deve-se usar o HandleBars como template ENGINE
-        app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.engine('handlebars', handlebars({
+    handlebars: allowInsecurePrototypeAccess(Handlebars) ////tive que usar para nao ter erro de acesso ao BD
+}), handlebars({defaultLayout: 'main'}))
         app.set('view engine', 'handlebars')
+
 
 
 //Rotas
 app.get('/',function(req,res){
-    res.render('home')
+    Post.findAll({order: [['id','DESC']]}).then(function(posts){  //{} - abre um objeto
+        //console.log(posts)
+        res.render('home',{posts: posts})
+    }) //then para receber os posts
+    
 })
 
 app.get('/cad', function(req,res){
