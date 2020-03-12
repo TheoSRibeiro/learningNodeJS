@@ -90,3 +90,5 @@ app.listen(8081, function(){
 
     console.log("Servidor rodando na url: http://localhost:8081")
 }) //porta 8081- localhost
+
+//abrir o servidor do MongoDB -- usar o comando no terminal: > mongod
