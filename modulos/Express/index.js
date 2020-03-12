@@ -76,6 +76,14 @@ app.post('/cadastro',function(req,res){ //USA POST SE A REQUISICAO FOR UM METODO
     })
 })
 
+app.get('/deletar/:id',function(req,res){ //recebe um parametro id
+    Post.destroy({ where: { 'id': req.params.id } }).then(function () { // vai destruir somente o registro no bd com o id que passei na url
+        res.send("Postagem deletada com sucesso!")
+    }).catch(function(erro){
+        res.send("Esta postagem não existe!")
+    }) 
+})
+
 
 //abrir servidor e deixar rodando
 app.listen(8081, function(){
